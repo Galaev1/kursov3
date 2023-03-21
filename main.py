@@ -1,27 +1,16 @@
-
-from utils import get_data, get_filtered_data, get_laste_data, get_formatted_data
 import json
 
+from utils import get_filtered_data, get_laste_data, get_formatted_data
 
 def main():
     with open('operations.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
+    ex_data = get_filtered_data(data)
+    ls_data = get_laste_data(ex_data, 5)
+    fr_data = get_formatted_data(ls_data)
 
-    OPEARATOINS_URL = data
-    COUNT_LASTE_VALUES = 5
-    FILTERED_EMPTY_FROM = True
-
-    data, info = get_data(OPEARATOINS_URL)
-    if not data:
-        exit(info)
-    print(info, end="\n\n")
-
-    data = get_filtered_data(data, FILTERED_EMPTY_FROM)
-    data = get_laste_data(data, COUNT_LASTE_VALUES)
-    data = get_formatted_data(data)
-    for row in data:
-        print(row)
-
+    result = '\n'.join(fr_data)
+    print(result)
 
 if __name__ == "__main__":
     main()
